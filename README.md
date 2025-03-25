@@ -11,11 +11,15 @@ You will need to reboot your computer to complete the installation.
 
 Git is required and should be installed using winget from a command prompt::
 ```
-winget install \--id Git.Git 
+winget install --id Git.Git 
 ```
 
 Install Microsoft Visual C++ 2015-2022 Redistributable Package  
 [https://aka.ms/vs/17/release/vc\_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+or
+```
+winget install Microsoft.VCRedist.2015+.x64
+```
 
  ![image101](https://github.com/user-attachments/assets/ff2ce11a-c1b1-40dd-aae7-187f918b240e)
 
@@ -24,7 +28,7 @@ This blueprint requires the installation of Blender. The blueprint has been test
 
 Blender 4.28 can also be installed using winget from a command prompt:
 ```
-winget install \--id 9NW1B444LDLW |
+winget install --id 9NW1B444LDLW |
 ```
 
 | IMPORTANT NOTE | Once Blender has been installed, you must open and then close the Blender application to properly set the paths needed by the Blueprint installer. |
