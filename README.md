@@ -75,11 +75,20 @@ Once you have generated an access token you’ll need to agree to the FluxDev No
 
 Click the Agree and access repository button. 
 
-# Installing the BluePrint {#installing-the-blueprint}
+# Installing the Blueprint:
 
-Download the Guided\_GenAI\_Blueprint\_v1.0.zip file, and extract it to your system in the folder you wish the installation to be installed. 
+Open a command prompt at the location where you would like the Blueprint files to be installed.
 
-From the extracted folder, run Setup.bat (It is recommended to run this batch file from the command line)
+Download the Blueprint using Git.
+```
+git clone https://github.com/NVIDIA-AI-Blueprints/3d-guided-genai-rtx.git
+```
+Then 
+```
+cd 3d-guided-genai-rtx
+```
+
+From 3d-guided-genai-rtx folder, run Setup.bat (It is recommended to run this batch file from the command line)
 
 The setup installer will install ComfyUI, the ComfyUI plugin for Blender, and other components required for the blueprint. 
 
