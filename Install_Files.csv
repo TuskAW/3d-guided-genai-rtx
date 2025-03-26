@@ -1,5 +1,6 @@
 package.zip,./ComfyUI,TRUE
-https://github.com/AIGODLIKE/ComfyUI-CUP.git,./ComfyUI/custom_nodes/ComfyUI-CUP,TRUE
-comfyui-depthanythingv2,comfy_manager_install,TRUE
-./ComfyUI/installertemp/Install_Blender_Addons.py,./ComfyUI/installertemp/Install_Blender_Addons.py,TRUE
-./ComfyUI/installertemp/Copy_Blender_Files.py,./ComfyUI/installertemp/Copy_Blender_Files.py,TRUE
+https://github.com/AIGODLIKE/ComfyUI-CUP.git,./ComfyUI/custom_nodes/ComfyUI-CUP,FALSE
+https://github.com/Comfy-Org/NIMnodes.git,./ComfyUI/custom_nodes/NIMnodes,FALSE
+./ComfyUI/installertemp/python_files/Install_Blender_Addons.py,./ComfyUI/installertemp/python_files/Install_Blender_Addons.py,TRUE
+./ComfyUI/installertemp/python_files/Copy_Blender_Files.py,./ComfyUI/installertemp/python_files/Copy_Blender_Files.py,TRUE
+./ComfyUI/installertemp/python_files/ComfyUI_NIM_Requirements.py,./ComfyUI/installertemp/python_files/ComfyUI_NIM_Requirements.py,TRUE
