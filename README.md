@@ -198,6 +198,9 @@ Replace the entire prompt with one of these:
 
 ![image123](https://github.com/user-attachments/assets/5851c084-52c1-4f25-9405-8f15db993d2d)
 
+### Adjusting the Image Output Location
+Change the output path in the Image Save node to point to a location on your system where you would like to save generated images.
+![image](https://github.com/user-attachments/assets/ffac56d5-23bf-4ddd-87eb-e34bb46f821d)
 
 # Restarting the ComfyUI Server
 
