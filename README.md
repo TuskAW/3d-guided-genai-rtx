@@ -77,7 +77,10 @@ hf_access_token represents the access token value you created in the step above
 Once you have generated an access token you’ll need to agree to the FluxDev Non-Commercial License Agreement and acknowledge the Acceptable Use Policy by visiting:  [https://huggingface.co/black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev)  
 ![image107](https://github.com/user-attachments/assets/265ba0e8-dc96-4d28-972f-255e7bfc085a)
 
-Click the Agree and access repository button. 
+Click the Agree and access repository button.
+
+Repeat the above process to accept the license for the the onnx version of the FLUX model
+[https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx)
 
 # Installing the Blueprint:
 
