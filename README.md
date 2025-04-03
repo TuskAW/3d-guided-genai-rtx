@@ -68,11 +68,11 @@ Copy your access token.
 
 Open a command prompt and issue the following command:
 
-```
-setx HF_TOKEN hf_access_token 
 
-hf_access_token represents the access token value you created in the step above
-```
+| setx HF_TOKEN *hf_access_token* |
+| ----------- |
+
+*hf_access_token* represents the actual access token value you created in the step above.
 
 Once you have generated an access token you’ll need to agree to the FluxDev Non-Commercial License Agreement and acknowledge the Acceptable Use Policy by visiting:  [https://huggingface.co/black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev)  
 ![image107](https://github.com/user-attachments/assets/265ba0e8-dc96-4d28-972f-255e7bfc085a)
