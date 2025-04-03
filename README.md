@@ -64,7 +64,7 @@ Create a new Access Token with READ permissions. (Note: If you have an existing 
 Copy your access token.
 
 
-### Create a HF\_TOKEN environment variable 
+### Create a HF_TOKEN environment variable 
 
 Open a command prompt and issue the following command:
 
@@ -79,8 +79,15 @@ Once you have generated an access token you’ll need to agree to the FluxDev No
 
 Click the Agree and access repository button.
 
-Repeat the above process to accept the license for the the onnx version of the FLUX model
-[https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx)
+Repeat the above process to accept the license for the following FLUX model variants:
+| Model      |URL |
+| ----------- | ----------- |
+| FLUX.1-Canny-dev      | [https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev](https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev) |
+| FLUX.1-Depth-dev      | [https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev](https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev) |
+| FLUX.1-dev-onnx       | [https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx) |
+| FLUX.1-Canny-dev-onnx | [https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-onnx) |
+| FLUX.1-Depth-dev-onnx | [https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-onnx) |
+
 
 # Installing the Blueprint:
 
