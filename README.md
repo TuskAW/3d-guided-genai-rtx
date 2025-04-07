@@ -134,7 +134,7 @@ From the Blender menu select File \>\> Open
 
 Navigate to Documents \>\> Blender    
 Select the **Guided\_GenAI\_BP.blend** file  
-![][image13]![image113](https://github.com/user-attachments/assets/f30729b4-a7f5-4b2f-8592-4a9176a723a0)
+![image113](https://github.com/user-attachments/assets/f30729b4-a7f5-4b2f-8592-4a9176a723a0)
 
 ![image114](https://github.com/user-attachments/assets/2319b3a4-2be8-4e79-862e-f894d65bd698)
 
