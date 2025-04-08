@@ -112,7 +112,7 @@ Once complete the installation will list the ComfyUI Path, and Python Path, this
 
 # Configure Blender:
 
-Once installation is complete start Blender and press CTRL+, to open Preferences or select from the menu Edit \>\>Preferences  
+Once installation is complete start Blender and press open Preferences from the menu: Edit \>\>Preferences  
 ![image110](https://github.com/user-attachments/assets/f31b9939-8f40-47b6-b582-dda5a96be13e)
 
 Select the Add-On section , and click the checkbox next to ComfyUI BlenderAI node.  
