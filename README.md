@@ -106,15 +106,9 @@ From 3d-guided-genai-rtx folder, run Setup.bat (It is recommended to run this ba
 
 The setup installer will install ComfyUI, the ComfyUI plugin for Blender, and other components required for the blueprint. 
 
-Installation may fail if long path name support is not enabled on the system, the installer will prompt if long pathname support isn’t currently enabled, and will provide an option to enable it. Enabling long path support requires rebooting the system. Once the system has been rebooted, re-run Setup.bat and you will be presented with an option menu.  
-![image108](https://github.com/user-attachments/assets/3f4bb20d-9d17-47d8-a00a-a417355cc391)
-
-Choose option \#3 when resuming an installation.
-
 Installation will take up to 20 minutes depending on download speed.  
 Once complete the installation will list the ComfyUI Path, and Python Path, this information will be used to set up the Blender ComfyUI add-on.   
 ![image109](https://github.com/user-attachments/assets/74abeef1-c970-49de-ac82-a913118d4ee9)
-
 
 # Configure Blender:
 
