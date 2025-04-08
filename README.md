@@ -28,13 +28,13 @@ This blueprint requires the installation of Blender. The blueprint has been test
 
 Blender 4.28 can also be installed using winget from a command prompt:
 ```
-winget install --id 9NW1B444LDLW |
+winget install --id 9NW1B444LDLW
 ```
 
 | IMPORTANT NOTE | Once Blender has been installed, you must open and then close the Blender application to properly set the paths needed by the Blueprint installer. |
 | :---- | :---- |
 
- Obtain a HuggingFace API Access Token  
+# Obtain a HuggingFace API Access Token  
 Open and command prompt and type the following:  
 
 ```
