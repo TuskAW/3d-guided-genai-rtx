@@ -151,15 +151,6 @@ If the Run button does not appear or the **Launch/Connect to ComfyUI** reappears
 
 Click the Run button.
 
-# NIM Setup
-
-If the FLUX NIM has not been set up prior to running the workflow, the ComfyUI NIM node will open the webpage to download the NimSetup.exe. Run the NIM Setup and follow the prompts to complete the setup.   
-![image118](https://github.com/user-attachments/assets/b956ae9f-2c3e-4bfb-a7bb-10a90ec717f8)
-
-After running the NIM Setup, close and restart Blender if it’s open, in Blender open the **Guided\_GenAI\_BP.blend** file.
-
-Click **Launch/Connect to ComfyUI** to reconnect to ComfyUI, then Click **Run.**  
-
 The first time the FLUX NIM is utilized it will need to download models from NVIDIA NGC and setup the FLUX NIM container, this process can take up to 20 minutes or more depending on the connection speed.
 
 # Guided GenAI Workflow
