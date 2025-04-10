@@ -20,8 +20,7 @@ or
 ```
 winget install Microsoft.VCRedist.2015+.x64
 ```
-
- ![image101](https://github.com/user-attachments/assets/ff2ce11a-c1b1-40dd-aae7-187f918b240e)
+![Untitled-8](https://github.com/user-attachments/assets/29184836-3791-4c22-8a40-3254590faa0e)
 
 This blueprint requires the installation of Blender. The blueprint has been tested with the Blender 4.28 LTS (Long Term Support) build.   
 [https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi](https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi)
@@ -42,27 +41,22 @@ set HF_TOKEN
 ```
 
 If a value is shown for the HF\_TOKEN like in the image below you can skip the steps for obtaining a HugginFace API Access Token and proceed to [Installing the Blueprint](#installing-the-blueprint)  
-![image102](https://github.com/user-attachments/assets/9faac397-1ed0-4bfb-a426-fa798d7af023)
-
+![Untitled-6](https://github.com/user-attachments/assets/c27ad5d1-e13b-4a0d-8a70-68d8c5a5ff33)
 
 If the command returns that the environment variable HF\_TOKEN is not defined, complete the steps below.  
-![image103](https://github.com/user-attachments/assets/fd687cf9-0834-4b08-a37e-c4f40b89fc1c)
-
+![Untitled-7](https://github.com/user-attachments/assets/cbac0a5b-5275-4a62-b921-7b47c48c0347)
 
 Create a user account at [https://huggingface.co/](https://huggingface.co/) or login to your existing account.   
 Select the “Settings” option on the left-hand menu.  
-![image104](https://github.com/user-attachments/assets/1c7fe06c-5482-4e89-92bc-cf2dd8a05bcf)
-
+![Untitled-1](https://github.com/user-attachments/assets/2d01f9a7-94c4-4b25-85e7-f2acb2face04)
 
 From the Left-Hand Menu select Access Tokens  
-![image105](https://github.com/user-attachments/assets/196f11be-bf61-4f12-a695-c4ebbe750d3d)
+![Untitled-2](https://github.com/user-attachments/assets/e175526f-b1e0-4b94-add9-21ef2ec872d6)
 
 Create a new Access Token with READ permissions. (Note: If you have an existing Access Token with read permissions you may use it instead of creating a new access token)
 
-![image106](https://github.com/user-attachments/assets/6e5624ea-b1f9-4f7d-b47e-327eeb28fe65)
-
 Copy your access token.
-
+![Untitled-3](https://github.com/user-attachments/assets/b483af4d-7d4b-4887-902e-556fe169c88d)
 
 ### Create a HF_TOKEN environment variable 
 
@@ -75,7 +69,7 @@ Open a command prompt and issue the following command:
 *hf_access_token* represents the actual access token value you created in the step above.
 
 Once you have generated an access token you’ll need to agree to the FluxDev Non-Commercial License Agreement and acknowledge the Acceptable Use Policy by visiting:  [https://huggingface.co/black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev)  
-![image107](https://github.com/user-attachments/assets/265ba0e8-dc96-4d28-972f-255e7bfc085a)
+![Untitled-4](https://github.com/user-attachments/assets/b903d754-5b8b-43d2-a784-e0a7b075b1d1)
 
 Click the Agree and access repository button.
 
@@ -108,44 +102,42 @@ The setup installer will install ComfyUI, the ComfyUI plugin for Blender, and ot
 
 Installation will take up to 20 minutes depending on download speed.  
 Once complete the installation will list the ComfyUI Path, and Python Path, this information will be used to set up the Blender ComfyUI add-on.   
-![image109](https://github.com/user-attachments/assets/74abeef1-c970-49de-ac82-a913118d4ee9)
+![Untitled-5](https://github.com/user-attachments/assets/ef8f876b-883a-4afe-8820-5b97908da86c)
 
 # Configure Blender:
 
 Once installation is complete start Blender and press open Preferences from the menu: Edit \>\>Preferences  
-![image110](https://github.com/user-attachments/assets/f31b9939-8f40-47b6-b582-dda5a96be13e)
+![Untitled-9](https://github.com/user-attachments/assets/c86d710d-39bf-48a4-8fc8-48b59ae16ebd)
 
 Select the Add-On section , and click the checkbox next to ComfyUI BlenderAI node.  
 Expand the ComfyUI BlenderAI node section by clicking on the \>  
-![image111](https://github.com/user-attachments/assets/d5466879-fab4-4a57-a2c1-2cca5b99be1c)
+![Untitled-10](https://github.com/user-attachments/assets/a8667460-d3ae-4e57-8bfe-10853dc2f7a1)
 
 In the ComfyUI Path and the Python Path configuration section, input the paths shown at the end of the blueprint installation process. Alternatively, you can click the folder icon and navigate to the installation location and select the ComfyUI folder, and the python\_embedded folder in the ComfyUI installation. 
 
 ## Open the Blueprint Blender File
 
 From the Blender menu select File \>\> Open  
-![image112](https://github.com/user-attachments/assets/0c222a1b-f76e-4240-a265-611358bcbea7)
+![Untitled-11](https://github.com/user-attachments/assets/0bec5bae-8cdb-4eff-a20e-569cf6a159f6)
 
 Navigate to Documents \>\> Blender    
 Select the **Guided\_GenAI\_BP.blend** file  
-![image113](https://github.com/user-attachments/assets/f30729b4-a7f5-4b2f-8592-4a9176a723a0)
+![Untitled-23](https://github.com/user-attachments/assets/7ecab817-b5bd-48a1-a4d3-70acd4bdbd6a)
 
-![image114](https://github.com/user-attachments/assets/2319b3a4-2be8-4e79-862e-f894d65bd698)
-
+![Untitled-12](https://github.com/user-attachments/assets/c590611c-de8c-409f-962f-a497f48228a5)
 
 If necessary expand the panel in the upper left viewport by clicking on the \< indicator. Alternatively move the mouse into the upper left viewport and press the “n” key on the keyboard.
-
-![image115](https://github.com/user-attachments/assets/dbc2a9ae-0db6-406b-a6d2-430f4972b14e)
+![Untitled-13](https://github.com/user-attachments/assets/5416a9ce-876d-4db0-bdfb-aba3553b2c85)
 
 Select the ComfyUI X Blender tab if needed. Click the **Launch/Connect to ComfyUI** button to start a local ComfyUI server instance. 
 
 It may take up to two minutes to start the ComfyUI service and establish a connection.  
-![image116](https://github.com/user-attachments/assets/bb1df709-830e-4531-a5aa-57c590e82e5d)
+![Untitled-14](https://github.com/user-attachments/assets/fc0aed22-5f45-40ee-8d18-873a58424e1d)
 
 NOTE:  The Blender system console can be opened from the Blender Menu selection Window \>\> Toggle System Console. The system console can help provide additional information about the ComfyUI startup process and provide updates while ComfyUI tasks are running.
 
 Once ComfyUi has started and is ready the panel will change and a **Run** button will appear.  
-![image117](https://github.com/user-attachments/assets/47de07fa-7c51-4d3e-abe9-5ec5d4f5c8a0)
+![Untitled-15](https://github.com/user-attachments/assets/9863ece0-0a29-4e0e-9362-535767c89091)
 
 If the Run button does not appear or the **Launch/Connect to ComfyUI** reappears, check the system console for any error messages.
 
@@ -165,8 +157,7 @@ By default the sample workflow will use the viewport scene combined with the fol
 You can change the output, by changing either the text prompt, the 3D viewport information or both. NOTE:  When generating output, some parameter must be changed before it’s possible to generate a new output, either the 3D scene information, prompt, or some parameter. If nothing has been changed the workflow will not process a new image. 
 
 The ComfyUI Connector panel is linked to the Input Text Node, you can change the prompt information here.   
-![image119](https://github.com/user-attachments/assets/413031a0-4bf7-4c02-89fe-ed03c490f10f)
-
+![Untitled-16](https://github.com/user-attachments/assets/6bc83aba-1177-470d-a27b-7b48ee8ebab6)
 
 In the prompt input area, add some additional information to the end of the existing text to change the output, for example try any of the following:  
 “At sunset”  
@@ -180,28 +171,24 @@ With the mouse in the upper left viewport press SHIFT \+ \~ to enter navigation 
 ### Replace Objects
 
 Click on the fountain object and click delete on the keyboard to remove the fountain.  
-![image120](https://github.com/user-attachments/assets/cd3a850f-8662-46d4-bdcf-7de218690c17)
+![Untitled-18](https://github.com/user-attachments/assets/8a9c5fb3-85e9-4abd-b74f-4a6dc8322eda)
 
 In the lower left area of the screen grab the boat object and drag it into the upper left viewport to the general location where the fountain was previously.   
-![image121](https://github.com/user-attachments/assets/45749569-b5c9-4200-89d9-b7dbde8bb26f)
 
 Replace the entire prompt with one of these:  
 “A stunning profession photo of a modern luxury boat in the canals of Venice, classical buildings, at sunset”  
 “An abandoned boat sitting between rows of warehouses”  
-![image122](https://github.com/user-attachments/assets/932aef4f-06d9-467e-9a4e-89f867ccd66d)
-
-
-![image123](https://github.com/user-attachments/assets/5851c084-52c1-4f25-9405-8f15db993d2d)
+![Untitled-19](https://github.com/user-attachments/assets/44988249-0c79-48a9-9fa0-29b5b5dd9a5f)
+![Untitled-20](https://github.com/user-attachments/assets/54b2dced-d809-4454-8238-69ab5599ba5d)
 
 ### Adjusting the Image Output Location
 Change the output path in the SaveImage node to point to a location on your system where you would like to save generated images.
-![image](https://github.com/user-attachments/assets/ffac56d5-23bf-4ddd-87eb-e34bb46f821d)
+![Untitled-21](https://github.com/user-attachments/assets/f4189a22-e309-465a-a91c-eb259bc73434)
 
 # Restarting the ComfyUI Server
 
 If errors occur when working with the NIM it may be necessary to restart the ComfyUI Server. To restart ComfyUI, place your mouse cursor in the ComfyUI node graph area and press “N” to display the panel.  
-![image124](https://github.com/user-attachments/assets/48d80d38-dc45-45a9-9ed4-bdc4e2f496e9)
-
+![Untitled-22](https://github.com/user-attachments/assets/fdda5ed7-183f-4f2f-9268-bc5d78918682)
 
 Click the ![image125](https://github.com/user-attachments/assets/065a8cc9-460e-48a0-abab-8a8dec9a0994) icon to stop ComfyUI.  
 Click the ![image126](https://github.com/user-attachments/assets/fddc145f-ac73-4228-9639-e69be7abc8bd) icon again to restart ComfyUI, or click the **Launch/Connect to ComfyUI** button.
