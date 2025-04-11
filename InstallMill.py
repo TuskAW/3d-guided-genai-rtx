@@ -1,5 +1,9 @@
-import io, os, csv, requests, zipfile, subprocess, sys
-# import py7zr
+import io, os, csv, requests, zipfile, subprocess, sys, time
+python_executable = sys.executable
+if not python_executable:
+    python_executable = "unknown"
+print(f"Current Python executable: {python_executable}")
+
 import shutil, argparse, urllib, validators, re, winreg, ctypes, typing
 import traceback
 import msvcrt
@@ -9,8 +13,11 @@ from pathlib import Path
 from huggingface_hub import hf_hub_download
 from huggingface_hub import snapshot_download
 from huggingface_hub.utils import are_progress_bars_disabled, disable_progress_bars, enable_progress_bars
+from huggingface_hub import list_repo_files
 from huggingface_hub import whoami
-from elevate import elevate
+
+
+
         
 def is_admin():
     try:
@@ -171,6 +178,78 @@ def stream_dl(url,file_name):
                 f.write(chunk)
     print('\nSave Complete.\n')
 
+def check_hf_token_validity(token):
+    """
+    Check if a Hugging Face token is valid using the whoami endpoint.
+
+    Args:
+        token (str): The Hugging Face API token to validate.
+
+    Returns:
+        tuple: A tuple containing:
+            - bool: True if the token is valid, False otherwise.
+            - dict or str: User information (dict) if valid, or an error message (str) if invalid.
+    """
+    # Check if the token is provided
+    if not token:
+        return False, "Token is empty or not provided"
+
+    # Define the API endpoint and headers
+    endpoint = "https://huggingface.co/api/whoami-v2"
+    headers = {"Authorization": f"Bearer {token}"}
+
+    try:
+        # Make the GET request to the whoami endpoint
+        response = requests.get(endpoint, headers=headers)
+
+        # Check the response status code
+        if response.status_code == 200:
+            # Parse and return user information if the token is valid
+            user_info = response.json()
+            return True, user_info
+        elif response.status_code == 401:
+            # Token is invalid
+            return False, "Invalid token"
+        else:
+            # Other API errors
+            return False, f"API error: {response.status_code} {response.reason}"
+
+    except requests.exceptions.RequestException as e:
+        # Handle network or request-related errors
+        return False, f"Request failed: {str(e)}"
+    except ValueError:
+        # Handle cases where the response is not valid JSON
+        return False, "Invalid response format: not JSON"
+
+def check_model_access(model):
+    """
+    Check if the user has access to a specified Hugging Face model using the HF_TOKEN environment variable.
+
+    Args:
+        model_name (str): The name of the model repository (e.g., "meta-llama/Llama-2-7b").
+
+    Returns:
+        tuple: (bool, str) where the first element indicates success (True if access is granted, False otherwise),
+               and the second element is a message explaining the result.
+    """
+
+    try:
+        # Attempt to list files in the model repository with the provided token
+        g = hf_hub_download(repo_id=model["model_name"], filename=model["filename"], token=model["token"])
+        return True, "User has access to the model"
+
+    except requests.exceptions.HTTPError as e:
+        # Handle HTTP errors, specifically 401 (Unauthorized) or 403 (Forbidden)
+        if e.response.status_code == 404:
+            return False, "The model repository does not exist"
+        elif e.response.status_code in [401, 403]:
+            return False, "User does not have access to the gated model"
+        else:
+            return False, f"An HTTP error occurred: {e}"
+
+    except Exception as e:
+        # Catch any other unexpected errors
+        return False, f"An unexpected error occurred: {e}"
 
 # Function to Download and extract files
 def get_and_extract(url, location, overwrite, basefolder=os.getcwd()):
@@ -304,7 +383,7 @@ print('Change the working folder to: '+installFolder)
 os.chdir(installFolder)
 
     
-baseFolder = os.path.normpath(os.getcwd())
+baseFolder = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
 
 # Now get the ComfyManager from it's git repo
 repository_url = "https://github.com/ltdrdata/ComfyUI-Manager.git"
@@ -320,6 +399,48 @@ subprocess.call([sys.executable, '-m', 'pip', 'install','-r','./ComfyUI/custom_n
 print(manifestFile)
 
 user_profile = os.environ.get('USERPROFILE')
+
+# Retrieve the token from the HF_TOKEN environment variable
+token = os.environ.get('HF_TOKEN')
+if not token:
+    print("HF_TOKEN is not set...set the HF_TOKEN environment variable with a valid token and restart Setup")
+    sys.exit("!!! SETUP FAILED:  Please set the HF_TOKEN environment variable and restart Setup")
+
+else:
+    is_valid, result = check_hf_token_validity(token)
+    if is_valid:
+        print(f"Token is valid! User info: {result}")
+    else:
+        print(f"Token is invalid or an error occurred: {result}")
+        print("HF_TOKEN value is not valid, please check the HF_TOKEN environment variable is a valid huggingface token and restart Setup")
+        sys.exit("!!! SETUP FAILED:  Please verify the HF_TOKEN environment variable is valid and restart Setup")
+
+#List of potentially gated models to verify if the user currently has access
+model_list = [{"model_name":"black-forest-labs/FLUX.1-dev","filename":".gitattributes","token":token},
+              {"model_name":"black-forest-labs/FLUX.1-Canny-dev","filename":".gitattributes","token":token},
+              {"model_name":"black-forest-labs/FLUX.1-Depth-dev","filename":".gitattributes","token":token},
+              {"model_name":"black-forest-labs/FLUX.1-dev-onnx","filename":".gitattributes","token":token},
+              {"model_name":"black-forest-labs/FLUX.1-Canny-dev-onnx","filename":".gitattributes","token":token},
+              {"model_name":"black-forest-labs/FLUX.1-Depth-dev-onnx","filename":".gitattributes","token":token},
+              ]
+non_accessible_models = []
+
+for model in model_list:
+    print(f"Checking model: {model['model_name']}")
+    result = check_model_access(model)
+    if result[0]:
+        print(f"Model access: {model['model_name']} is accessible")
+    else:
+        print(f"Model access: {model['model_name']} is not accessible")
+        print(result[1])
+        non_accessible_models.append(model["model_name"])
+
+if len(non_accessible_models) > 0:
+    print("The following models are not accessible:")
+    for model in non_accessible_models:
+        print(f"\t{model}: https://huggingface.co/{model}")
+    print("Please accept the use license for the listed models and restart Setup")
+    sys.exit("!!! SETUP FAILED:  Please accept the use license for ALL listed models and restart Setup")
 
 
 with open(manifestFile, mode ='r')as file:
