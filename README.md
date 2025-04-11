@@ -2,7 +2,8 @@
 
 
 This Blueprint utilizes the FLUX NIM to allow users to control the output of a FLUX image generation using 3D elements in Blender. 
-
+> This blue print supports the following NVIDIA GPUs:  RTX 5090, RTX 5090D, RTX 5080, RTX 4090, RTX 4080, RTX 4080 Super, RTX 6000 Ada
+> 
 # Prerequisites: 
 The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequesite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
 
