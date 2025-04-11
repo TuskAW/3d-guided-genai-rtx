@@ -4,6 +4,7 @@
 This Blueprint utilizes the FLUX NIM to allow users to control the output of a FLUX image generation using 3D elements in Blender. 
 
 # Prerequisites: 
+The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequesite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
 
 Download the [NIM Prerequisite Installer](https://assets.ngc.nvidia.com/products/api-catalog/rtx/NIM_Prerequisites_Installer_03052025.zip), extract the zip file and run the NIMSetup.exe file, and follow the instructions in the setup dialogs. This will install the necessary system components to work with NVIDIA NIMS on your system.
 
@@ -184,6 +185,36 @@ Replace the entire prompt with one of these:
 ### Adjusting the Image Output Location
 Change the output path in the SaveImage node to point to a location on your system where you would like to save generated images.
 ![Untitled-21](https://github.com/user-attachments/assets/f4189a22-e309-465a-a91c-eb259bc73434)
+
+## Stopping the NIM
+Closing Blender after the FLUX NIM has been loaded may leave the NIM running in the background which can unneccesarily consume GPU and System resources, best practice is to stop the NIM when it is no longer needed, or before exiting Blender.
+
+**Steps to stop the NIM:**
+1. In the node tree, locate the **LoadNIMNode** node
+2. ![Untitled-24](https://github.com/user-attachments/assets/5bd7cddb-ed55-4cc3-8b02-2e26f90f58b9)
+3. Switch the *operation* setting from **Start** to **Stop**
+4. ![Untitled-25](https://github.com/user-attachments/assets/1ab49581-5399-463f-b027-7e8baff915ea)
+5. Click **Run** to run the workflow
+6. This will cause an error in the NIMFLUXNode as the NIM is no longer available to run the workflow.
+7. ![Untitled-26](https://github.com/user-attachments/assets/2bd59522-4e8f-485a-bd4a-c3865900ed8e)
+
+### Manually stopping a NIM
+1. If a NIM isn't stopped via the Stop method of the **LoadNIMNode** it may be necessary to manually stop the NIM via the command console
+2. Open a windows command console and type:
+3. > wsl podman ps -a
+4. ![Untitled-27](https://github.com/user-attachments/assets/170be810-178f-44ad-bda2-89949105ef3d)
+5. This will show the current active NIM containers
+6. Note the name of the container **FLUX_DEPTH**
+7. Issue the following command:
+8. > wsl podman stop FLUX_DEPTH
+9. ![Untitled-28](https://github.com/user-attachments/assets/b98f38c7-8ec8-4d65-bd50-6a655f0a35d8)
+10. You can re-run the wsl podman ps -a command to verify that the FLUX_NIM is no longer running.
+
+
+   
+
+
+
 
 # Restarting the ComfyUI Server
 
