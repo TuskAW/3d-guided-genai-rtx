@@ -1,9 +1,11 @@
-<h2><img align="center" src="https://github.com/user-attachments/assets/cbe0d62f-c856-4e0b-b3ee-6184b7c4d96f">3D Guided Gen AI Blueprint - FLUX NIM</h2>
+<h2><img align="center" src="https://github.com/user-attachments/assets/cbe0d62f-c856-4e0b-b3ee-6184b7c4d96f">3D Guided Generative AI Blueprint - FLUX.dev NIM</h2>
 
 # Description: 
-The 3D Guided Generative AI Blueprint unlocks greater control over image generation by laying out the content in Blender to guide the image layout. Users can quickly alter the look of the 3D scene using generative AI, and the image outputs can be iterated on quickly by making simple changes in the 3D viewport - such as changing the image perspective by adjusting the camera angle in Blender. 
+The 3D Guided Generative AI Blueprint unlocks greater control over image generation by laying out the content in Blender to guide the image layout. Users can quickly alter the look of the 3D scene using generative AI, and the image outputs can be iterated on by making simple changes in the 3D viewport - such as changing the image perspective by adjusting the camera angle in Blender. Creators can ideate on scene environments much faster using generative AI, and adjustments are made much faster due to the control offered by using the viewport as a depth map.    
 
 The blueprint produces high-quality outputs by leveraging the FLUX.dev NIM, using Black Forest Labs' state-of-the-art FLUX.dev models, and ComfyUI provides a flexible and convenient UI. The models are quantized and accelerated on NVIDIA GPUs, ensuring optimal performance and enabling this workflow to run on consumer GPUs.
+
+This blueprint is ready for non-commercial use. Contact sales@blackforestlabs.ai for commercial terms.
 
 > This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 4090 Laptop, RTX 4080, RTX 6000 Ada
 
