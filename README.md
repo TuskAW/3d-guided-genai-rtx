@@ -7,7 +7,7 @@ The blueprint produces high-quality outputs by leveraging the FLUX.dev NIM, usin
 
 This blueprint is ready for non-commercial use. Contact sales@blackforestlabs.ai for commercial terms.
 
-> This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 4090 Laptop, RTX 4080, RTX 6000 Ada
+> This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 4090 Laptop, RTX 4080, RTX 6000 Ada. We recommend at least 48 GB of system RAM. 
 
 # Prerequisites: 
 The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequisite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
@@ -29,10 +29,10 @@ winget install Microsoft.VCRedist.2015+.x64
 ```
 ![Untitled-8](https://github.com/user-attachments/assets/29184836-3791-4c22-8a40-3254590faa0e)
 
-This blueprint requires the installation of Blender. The blueprint has been tested with the Blender 4.28 LTS (Long Term Support) build.   
+This blueprint requires the installation of Blender. The blueprint has been tested with the Blender 4.27 LTS (Long Term Support) build.   
 [https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi](https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi)
 
-Blender 4.28 can also be installed using winget from a command prompt:
+Blender 4.27 can also be installed using winget from a command prompt:
 ```
 winget install --id 9NW1B444LDLW
 ```
@@ -47,7 +47,7 @@ Open and command prompt and type the following:
 set HF_TOKEN
 ```
 
-If a value is shown for the HF\_TOKEN like in the image below you can skip the steps for obtaining a HugginFace API Access Token and proceed to [Installing the Blueprint](#installing-the-blueprint)  
+If a value is shown for the HF\_TOKEN like in the image below you can skip the steps for obtaining a HuggingFace API Access Token and proceed to [Installing the Blueprint](#installing-the-blueprint)  
 ![Untitled-6](https://github.com/user-attachments/assets/c27ad5d1-e13b-4a0d-8a70-68d8c5a5ff33)
 
 If the command returns that the environment variable HF\_TOKEN is not defined, complete the steps below.  
