@@ -1,13 +1,16 @@
 <h2><img align="center" src="https://github.com/user-attachments/assets/cbe0d62f-c856-4e0b-b3ee-6184b7c4d96f">3D Guided Gen AI Blueprint - FLUX NIM</h2>
 
+# Description: 
+The 3D Guided Generative AI Blueprint unlocks greater control over image generation by laying out the content in Blender to guide the image layout. Users can quickly alter the look of the 3D scene using generative AI, and the image outputs can be iterated on quickly by making simple changes in the 3D viewport - such as changing the image perspective by adjusting the camera angle in Blender. 
 
-This Blueprint utilizes the FLUX NIM to allow users to control the output of a FLUX image generation using 3D elements in Blender. 
+The blueprint produces high-quality outputs by leveraging the FLUX.dev NIM, using Black Forest Labs' state-of-the-art FLUX.dev models, and ComfyUI provides a flexible and convenient UI. The models are quantized and accelerated on NVIDIA GPUs, ensuring optimal performance and enabling this workflow to run on consumer GPUs.
+
 > This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 4090 Laptop, RTX 4080, RTX 6000 Ada
-> 
-# Prerequisites: 
-The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequesite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
 
-Download the [NIM Prerequisite Installer](https://assets.ngc.nvidia.com/products/api-catalog/rtx/NIM_Prerequisites_Installer_03052025.zip), extract the zip file and run the NIMSetup.exe file, and follow the instructions in the setup dialogs. This will install the necessary system components to work with NVIDIA NIMS on your system.
+# Prerequisites: 
+The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequisite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
+
+Download the [NIM Prerequisite Installer](https://assets.ngc.nvidia.com/products/api-catalog/rtx/NIM_Prerequisites_Installer_03052025.zip), extract the zip file and run the NIMSetup.exe file, and follow the instructions in the setup dialogs. This will install the necessary system components to work with NVIDIA NIMs on your system.
 
 You will need to reboot your computer to complete the installation.
 
