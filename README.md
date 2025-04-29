@@ -236,5 +236,7 @@ Click the ![image126](https://github.com/user-attachments/assets/fddc145f-ac73-4
 
 Re-run the workflow.
 
-
+# Troubleshooting
+**Problem:**  When running Setup.bat you receive an error "tar: LZMA codec is unsupported" "tar: Error exit delayed from previous errors."
+**Solution:** Manually extract the *ComfyUI_windows_portable_nvidia.7z* file using 7-zip. If necessary install 7-zip using `winget install 7-zip` Then issue the following command from a command prompt at the location containing *setup.bat*  `"C:\Program Files\7-Zip\7z x ComfyUI_windows_portable_nvidia.7z`  Once the files have successfully extracted, re-run Setup.bat and choose the option to resume the installation. 
 
