@@ -229,10 +229,16 @@ Click the ![image126](https://github.com/user-attachments/assets/fddc145f-ac73-4
 Re-run the workflow.
 
 # Troubleshooting
+
 **Problem:**  NIMSetup.exe continuously requests that you restart to continue the setup process.
+
 **Solution:** Changing the Windows display language to English will fix this issue. This is a bug and will be fixed in an upcoming patch.
+
 **Problem:**  The ComfyUI workflow times out on the first run, giving this error: {'type': 'TimeoutError', 'message': 'NIM Server did not start within the specified timeout.'}
+
 **Solution:** If the time to execute a prompt, including NIM setup, takes longer than 30 mins (1800 secs), the NIM node times out so it doesn't wait indefinitely. The only time this should happen is during first run, when it needs to download all the NIM models. If this happens, simply run again - it should no longer time out since it no longer needs to do all the first time run steps again.
+
 **Problem:**  When running Setup.bat you receive an error "tar: LZMA codec is unsupported" "tar: Error exit delayed from previous errors."
+
 **Solution:** Manually extract the *ComfyUI_windows_portable_nvidia.7z* file using 7-zip. If necessary install 7-zip using `winget install 7-zip` Then issue the following command from a command prompt at the location containing *setup.bat*  `"C:\Program Files\7-Zip\7z x ComfyUI_windows_portable_nvidia.7z`  Once the files have successfully extracted, re-run Setup.bat and choose the option to resume the installation. 
 
