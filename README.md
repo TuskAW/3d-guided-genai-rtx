@@ -11,7 +11,7 @@ The blueprint produces high-quality outputs by leveraging the FLUX.dev NIM, usin
 
 This blueprint is ready for non-commercial use. Contact sales@blackforestlabs.ai for commercial terms.
 
-> This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 4090 Laptop, RTX 4080, RTX 6000 Ada. We recommend at least 48 GB of system RAM. 
+> This blueprint supports the following NVIDIA GPUs:  RTX 5090, RTX 5080, RTX 4090, RTX 6000 Ada. We recommend at least 48 GB of system RAM. We are in the process of adding support for more GPUs. 
 
 # Prerequisites: 
 The NIM Prerequisite Installer requires Microsoft User Account Control (UAC) to be enabled.  UAC is enabled by default for Windows, but if it has been disabled, it must be enabled to ensure successful installation of the NIM Prerequisite Installer.  More information on Microsoft UAC can found [HERE](https://support.microsoft.com/en-us/windows/user-account-control-settings-d5b2046b-dcb8-54eb-f732-059f321afe18)
@@ -84,15 +84,7 @@ Once you have generated an access token you’ll need to agree to the FluxDev No
 
 Click the Agree and access repository button.
 
-Repeat the above process to accept the license for the following FLUX model variants:
-| Model      |URL |
-| ----------- | ----------- |
-| FLUX.1-Canny-dev      | [https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev](https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev) |
-| FLUX.1-Depth-dev      | [https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev](https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev) |
-| FLUX.1-dev-onnx       | [https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx) |
-| FLUX.1-Canny-dev-onnx | [https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-onnx) |
-| FLUX.1-Depth-dev-onnx | [https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-onnx) |
-
+Repeat the above process to accept the license for the ONNX variant: [https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx](https://huggingface.co/black-forest-labs/FLUX.1-dev-onnx)
 
 # Installing the Blueprint:
 
@@ -154,7 +146,7 @@ If the Run button does not appear or the **Launch/Connect to ComfyUI** reappears
 
 Click the Run button.
 
-The first time the FLUX NIM is utilized it will need to download models from NVIDIA NGC and setup the FLUX NIM container, this process can take up to 20 minutes or more depending on the connection speed.
+The first time the FLUX NIM is utilized it will need to download models from NVIDIA NGC and setup the FLUX NIM container, this process can take up to 20 minutes or more depending on the connection speed. Note that if it takes >30 minutes to run, it may time out and give an error. If so, you'll need to run it a second time, which should succeed.
 
 # Guided GenAI Workflow
 
@@ -237,6 +229,10 @@ Click the ![image126](https://github.com/user-attachments/assets/fddc145f-ac73-4
 Re-run the workflow.
 
 # Troubleshooting
+**Problem:**  NIMSetup.exe continuously requests that you restart to continue the setup process.
+**Solution:** Changing the Windows display language to English will fix this issue. This is a bug and will be fixed in an upcoming patch.
+**Problem:**  The ComfyUI workflow times out on the first run, giving this error: {'type': 'TimeoutError', 'message': 'NIM Server did not start within the specified timeout.'}
+**Solution:** If the time to execute a prompt, including NIM setup, takes longer than 30 mins (1800 secs), the NIM node times out so it doesn't wait indefinitely. The only time this should happen is during first run, when it needs to download all the NIM models. If this happens, simply run again - it should no longer time out since it no longer needs to do all the first time run steps again.
 **Problem:**  When running Setup.bat you receive an error "tar: LZMA codec is unsupported" "tar: Error exit delayed from previous errors."
 **Solution:** Manually extract the *ComfyUI_windows_portable_nvidia.7z* file using 7-zip. If necessary install 7-zip using `winget install 7-zip` Then issue the following command from a command prompt at the location containing *setup.bat*  `"C:\Program Files\7-Zip\7z x ComfyUI_windows_portable_nvidia.7z`  Once the files have successfully extracted, re-run Setup.bat and choose the option to resume the installation. 
 
