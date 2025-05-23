@@ -162,7 +162,7 @@ REM Get the python packages that the install script needs
 ECHO Install the Python Dependencies
 ECHO %comfyui_install_dir%python_embeded\python.exe -m pip install --no-cache-dir requests gitpython py7zr huggingface-hub validators
 %comfyui_install_dir%python_embeded\python.exe -s -m pip install --upgrade pip
-%comfyui_install_dir%python_embeded\python.exe -m pip install  --no-cache-dir requests gitpython huggingface-hub validators
+%comfyui_install_dir%python_embeded\python.exe -m pip install  --no-cache-dir requests gitpython huggingface-hub validators pynvml
 
 
 REM Run the install script
