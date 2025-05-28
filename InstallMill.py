@@ -357,11 +357,35 @@ def get_and_extract(url, location, overwrite, basefolder=os.getcwd()):
                     # archive.extractall(path=location)
                     # archive.close()
                 case '.py':
-                    # case to handle processing py files for additional functionality needs
-                    if element.item_type == 'LOCAL_FILE':   
-                        exec(open(element.url).read(), globals())
+                    if element.item_type == 'LOCAL_FILE':
+                        print(f"Executing local Python script: {element.url}")
+                        try:
+                            # Run the script as a subprocess with Popen for real-time output
+                            process = subprocess.Popen(
+                                [sys.executable, element.url],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,  # Combine stderr with stdout
+                                text=True,
+                                bufsize=1,
+                                universal_newlines=True
+                            )
+                            # Stream output in real-time
+                            while True:
+                                line = process.stdout.readline().strip()
+                                if not line and process.poll() is not None:
+                                    break
+                                if line:
+                                    print(line)  # Print output to console
+                            # Wait for the process to complete and get the return code
+                            return_code = process.wait()
+                            print(f"Script {element.url} exited with code {return_code}")
+                            if return_code != 0:
+                                print(f"Warning: Script {element.url} failed with exit code {return_code}")
+                            # Continue processing CSV regardless of exit code
+                        except subprocess.SubprocessError as e:
+                            print(f"Error executing {element.url}: {e}")
                     else:
-                        stream_dl(url,location)
+                        stream_dl(url, location)
 
                 # Not an archive
                 case _:

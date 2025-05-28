@@ -4,3 +4,5 @@ https://github.com/Comfy-Org/NIMnodes.git,./ComfyUI/custom_nodes/NIMnodes,FALSE
 ../package/python_files/Copy_Blender_Files.py,./ComfyUI/installertemp/python_files/Copy_Blender_Files.py,TRUE
 ../package/python_files/ComfyUI_NIM_Requirements.py,./ComfyUI/installertemp/python_files/ComfyUI_NIM_Requirements.py,TRUE
 ../package/python_files/InstallChatTo3D.py,InstallChatTo3D.py,TRUE
+../package/python_files/run_ngc_podman_flux.py,run_ngc_podman_flux.py,TRUE
+../package/python_files/run_ngc_podman_llama.py,run_ngc_podman_llama.py,TRUE

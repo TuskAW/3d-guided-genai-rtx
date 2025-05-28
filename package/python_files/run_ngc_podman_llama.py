@@ -181,7 +181,7 @@ def stop_container():
 def main():
     logger.debug("Starting run_ngc_podman.py")
     # Use current directory as target_dir
-    target_dir = Path(os.getcwd()).resolve()
+    target_dir = Path(__file__).resolve().parent
     logger.debug(f"Using target_dir (CWD): {target_dir}")
 
     try:
@@ -196,7 +196,7 @@ def main():
             sys.exit(1)
 
         # Resolve shell script path
-        script_dir = target_dir
+        script_dir = target_dir.parent /  "shell_scripts"
         windows_script_path = script_dir / "start_llama_container.sh"
         logger.debug(f"Checking for shell script: {windows_script_path}")
         if not windows_script_path.exists():

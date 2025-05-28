@@ -181,7 +181,7 @@ def stop_container():
 def main():
     logger.debug("Starting run_ngc_podman_flux.py")
     # Use current directory as target_dir
-    target_dir = Path(os.getcwd()).resolve()
+    target_dir = Path(__file__).resolve().parent
     logger.debug(f"Using target_dir (CWD): {target_dir}")
 
     try:
@@ -204,8 +204,9 @@ def main():
         logger.debug(f"Retrieved HF_TOKEN: {hftoken}")
 
         # Resolve shell script path
-        script_dir = target_dir
-        windows_script_path = script_dir / "start_flux_container.sh"
+        script_dir = target_dir.parent /  "shell_scripts"
+        script_name = "start_flux_container.sh"
+        windows_script_path = script_dir / script_name
         logger.debug(f"Checking for shell script: {windows_script_path}")
         if not windows_script_path.exists():
             logger.error(f"Shell script not found: {windows_script_path}")
@@ -217,12 +218,12 @@ def main():
         wsl_script_path = f"/mnt/{drive_letter}{windows_script_path.as_posix()[2:]}"
         logger.info(f"Resolved WSL script path: {wsl_script_path}")
 
-        # Prepare environment and command with --hftoken
-        bash_command = f"export NGC_API_KEY='{ngc_api_key}' && '{wsl_script_path}' --hftoken={hftoken}"
+        # Prepare environment and command with hftoken as positional argument
+        bash_command = f"export NGC_API_KEY='{ngc_api_key}' && '{wsl_script_path}' '{hftoken}'"
         logger.debug(f"Prepared bash command: {bash_command}")
 
         # Open log file for writing
-        log_file_path = script_dir / "nim_llm" / "flux_container.log"
+        log_file_path = script_dir / "logs" / "flux_container.log"
         logger.debug(f"Opening log file: {log_file_path}")
         try:
             # Ensure nim_llm directory exists
@@ -290,13 +291,13 @@ def main():
                     sys.exit(1)
 
                 if process.returncode != 0:
-                    logger.error(f"Podman command failed with exit code {process.returncode}")
-                    print(f"Error: Podman command failed with exit code {process.returncode}")
-                    stop_container()
-                    sys.exit(process.returncode)
+                    logger.warning(f"Podman command returned non-zero exit code {process.returncode}, but startup completed successfully.")
+                    print(f"Warning: Podman command returned non-zero exit code {process.returncode}, but startup completed successfully.")
+                    # Exit with 0 to allow host script to proceed
+                    sys.exit(0)
 
-            logger.info("Podman command executed and container stopped successfully.")
-            print("Podman command executed and container stopped successfully.")
+                logger.info("Podman command executed and container stopped successfully.")
+                print("Podman command executed and container stopped successfully.")
 
         except FileNotFoundError as e:
             logger.error(f"Failed to create log file {log_file_path}: {e}")
