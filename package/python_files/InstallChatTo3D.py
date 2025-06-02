@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 gHubURL = 'https://github.com/SKilbride/chat-to-3d-sean.git'
 
 # Get the directory two levels up from the current script (C:\Users\NV\VisualGenAI_BP\3d-guided-genai-rtx\package)
-output_path = Path(__file__).resolve().parent.parent
+output_path = Path(__file__).resolve().parent.parent.parent.parent
 target_dir = output_path / 'chat-to-3d'
 
 def get_conda_exe() -> str | None:
