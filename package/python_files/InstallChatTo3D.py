@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 # GitHub repository URL
-gHubURL = 'https://github.com/SKilbride/chat-to-3d-sean.git'
+gHubURL = 'https://github.com/anmaurya001/chat-to-3d.git'
 
 # Get the directory two levels up from the current script (C:\Users\NV\VisualGenAI_BP\3d-guided-genai-rtx\package)
 output_path = Path(__file__).resolve().parent.parent.parent.parent
