@@ -239,10 +239,76 @@ Closing Blender after the FLUX NIM has been loaded may leave the NIM running in 
 9. ![Untitled-28](https://github.com/user-attachments/assets/b98f38c7-8ec8-4d65-bd50-6a655f0a35d8)
 10. You can re-run the wsl podman ps -a command to verify that the FLUX_NIM is no longer running.
 
+# Using CHAT-TO-3D for 3D Object Generation
+CHAT-TO-3D is automatically installed with this blueprint, it allows you to generate 3D assets using an LLM front end connected to a TRELLIS 3D object generation service
 
-   
+## Usage - Blender Add On
+The CHAT-TO-3D Blender add-on can automatically manage the CHAT-TO-3D services without the need to manually start or stop these services outside of Blender.
+### Initial Setup Step
+1. Open Blender
+2. Open Edit >> Preferences >> Add-Ons
+3.![image](https://github.com/user-attachments/assets/0dd045e1-225a-425f-9f96-9047f3ad476a)
+4. Enable CHAT-To-3D and Asset Importer by checking the boxes next to the add on names.
+5. Open the CHAT-TO-3D add on preferences and set the CHAT-TO-3D base folder to the chat-to-3d local repository directory.
+6. ![image](https://github.com/user-attachments/assets/1f9b6bec-dd13-4a7b-9a02-ac9c84a56869)
+### Normal Usage
+7. In the 3D layout view look for the Add On tabs on the right edge of the viewport, press N if they are not visible
+8. ![image](https://github.com/user-attachments/assets/2bfc6cb2-aa3a-4422-b1d1-a983ed21407d)
+9. Note: It is recommended to open a system console viewer to monitor the services and any information or errors that may be output.
+   a. Blender Menu >> Window >> Toggle System Console
+10. Click the Start CHAT-TO-3D button to start the LLM agent, and the Trellis 3D services.
+11. ![image](https://github.com/user-attachments/assets/b5391eed-0cca-45da-952a-04381804c0b5)
+12. Once all services have successfully started, the service will indicate: READY and the OPEN CHAT-TO-3D UI button will become available
+13. Click the OPEN CHAT-TO-3D UI button to launch the CHAT-TO-3D interface
+    
+### Using the Interface
+![image](https://github.com/user-attachments/assets/8590e6fd-32cb-4974-bcc9-284ef7d1eaa2)
+Once the application is running, you can:
+1. **Scene Planning**:
+   - Describe your desired scene in natural language
+   - ![image](https://github.com/user-attachments/assets/38c408f6-219e-4fdc-93f4-5abaea80b391)
+
+   - Get AI suggestions for objects and layout
+   - ![image](https://github.com/user-attachments/assets/40f3c85e-2024-499b-bc1c-926d478f0555)
+  
+   - Select the desired objects
+   - ![image](https://github.com/user-attachments/assets/7e389a1b-f9da-4d1f-bc45-e854e8b6cee3)
+
+   - Refine your scene description
+   - ![image](https://github.com/user-attachments/assets/5779fbb4-40ad-437a-8f3f-7f4191df1cdd)
+  
+   - Generate 3D Prompts for selected objects
+   - ![image](https://github.com/user-attachments/assets/cadf5ba7-516f-4fee-9992-ac4e70c0f6d6)
+
+2. **Asset Generation**:
+   - Modify the generated prompt if desired
+   - Generate object variant previews for a single object or for all objects
+   -![image](https://github.com/user-attachments/assets/5dfb5ba2-c718-4594-8a9b-b4584f5599fb)
+
+   - Select a desired variant and click Select this Variant button
+   - ![image](https://github.com/user-attachments/assets/8f3a488f-f50d-4586-ab1c-76f6d7e54c49)
+  
+   - Select a Single Image and click *Generate 3D Model for Selected Variant* button
+   - Or click *Generate 3D Models for all Selected Variants* button
+   - ![image](https://github.com/user-attachments/assets/d028ec91-b279-4057-ade1-ea4e15cf9454)
+  
+   - Preview generated assets
+   - ![image](https://github.com/user-attachments/assets/593bcb43-a4ef-4f8a-b2ba-94d3cbb7a57e)
+
+   - Save generated asset to a scene folder
+   - Create a unique folder output for all objects generated in this session
+   - ![image](https://github.com/user-attachments/assets/dddae747-0f54-43bc-9fc8-620e35f44a1f)
 
 
+4. **Blender Integration**:
+   - Import generated assets directly into Blender
+   - ![image](https://github.com/user-attachments/assets/e6942a0c-6e03-4cbb-9bd6-63507e7eddac)
+   - Use the Asset Importer add-on and select the desired scene folder, and click Import assets
+   - ![image](https://github.com/user-attachments/assets/b9119900-1780-42cd-a071-6f7d9397984e)
+   - Assets are imported and the asset tag is applied, saving the scene to the %userprofile%\Documents\Blender\assets folder will add the imported objects to the Blender asset browser.
+   - ![image](https://github.com/user-attachments/assets/c3d705c1-fc21-4137-a6e1-004c9d9b0b5a)
+   - Continue working with the assets in your 3D workflow
+   - Can be used with  [3D Guided Gen AI BP](https://github.com/NVIDIA-AI-Blueprints/3d-guided-genai-rtx)
 
 
 # Restarting the ComfyUI Server
