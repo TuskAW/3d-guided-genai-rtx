@@ -6,6 +6,7 @@ import subprocess
 import os
 import platform
 import logging
+import re
 
 # Set up logging for get_conda_python_path and general use
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
