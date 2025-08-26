@@ -1,4 +1,4 @@
-import io, os, csv, requests, zipfile, subprocess, sys, time
+import io, os, csv, requests, zipfile, subprocess, sys, time, platform
 python_executable = sys.executable
 if not python_executable:
     python_executable = "unknown"
@@ -7,6 +7,7 @@ print(f"Current Python executable: {python_executable}")
 import shutil, argparse, urllib, validators, re, winreg, ctypes, typing
 import traceback
 import msvcrt
+import logging
 from sys import version_info
 from git import Repo
 from pathlib import Path
@@ -16,8 +17,66 @@ from huggingface_hub.utils import are_progress_bars_disabled, disable_progress_b
 from huggingface_hub import list_repo_files
 from huggingface_hub import whoami
 
+# Set up logging for get_conda_python_path and general use
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+logger = logging.getLogger(__name__)
 
-
+def set_persistent_env_var(name: str, value: str, system_level: bool = False) -> bool:
+    """Set a persistent environment variable."""
+    try:
+        if platform.system() == "Windows":
+            scope = "System" if system_level else "User"
+            cmd = ['setx', name, value]
+            if system_level:
+                cmd = [
+                    'powershell', '-Command',
+                    f'[Environment]::SetEnvironmentVariable("{name}", "{value}", "{scope}")'
+                ]
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            print(f"Successfully set persistent environment variable '{name}' = '{value}' ({scope} level)")
+            logger.info("Setx/PowerShell output: %s", result.stdout.strip())
+        
+        else:  # Linux/macOS
+            shell = os.environ.get('SHELL', '')
+            if 'bash' in shell:
+                config_file = Path.home() / '.bashrc'
+            elif 'zsh' in shell:
+                config_file = Path.home() / '.zshrc'
+            else:
+                config_file = Path.home() / '.profile'
+            
+            if system_level:
+                config_file = Path('/etc/environment')
+                if not os.access(config_file, os.W_OK):
+                    print(f"Cannot write to {config_file}: Requires root privileges")
+                    logger.error("Insufficient permissions for system-level variable")
+                    return False
+            
+            with config_file.open('a') as f:
+                f.write(f'\nexport {name}="{value}"\n')
+            print(f"Successfully set persistent environment variable '{name}' = '{value}' in {config_file}")
+            logger.info("Appended to %s: export %s=%s", config_file, name, value)
+            os.environ[name] = value
+        
+        return True
+    
+    except subprocess.CalledProcessError as e:
+        print(f"Error setting environment variable '{name}': {e.stderr}")
+        logger.error("Failed to set environment variable: %s", e.stderr)
+        return False
+    except PermissionError:
+        print(f"Permission denied: Cannot set {name} at {'system' if system_level else 'user'} level")
+        logger.error("Permission denied for environment variable %s", name)
+        return False
+    except Exception as e:
+        print(f"Unexpected error setting environment variable '{name}': {str(e)}")
+        logger.error("Unexpected error: %s", str(e))
+        return False
         
 def is_admin():
     try:
@@ -48,6 +107,7 @@ class ManifestItem:
             self.url_parts = None
 
         self.item_type = self.interrogate_url()
+        print(f'The manifest item type is: {self.item_type}')
 
     def interrogate_url(self):
 
@@ -65,6 +125,9 @@ class ManifestItem:
 
             if self.location.lower() == 'comfy_manager_install':
                 return 'CM_MANAGER_INSTALL'
+            elif self.location.lower() == 'winget_install':
+                print("Found winget_install...")
+                return 'WINGET_INSTALL'
             return 'INVALID_URL'
 
         if self.url_parts.netloc == "huggingface.co":
@@ -300,6 +363,38 @@ def get_and_extract(url, location, overwrite, basefolder=os.getcwd()):
         case 'CM_MANAGER_INSTALL':
             subprocess.call([sys.executable, './ComfyUI/custom_nodes/ComfyUI-Manager/cm-cli.py','install',element.url])
 
+        case 'WINGET_INSTALL':
+            print(f"Installing winget install using: 'winget install {element.url}'")
+            try:
+                # Construct the winget install command
+                command = f'winget install --id {element.url}'
+
+                # Notify the user
+                print(f"Installing {element.url} using winget. Please respond to any prompts in the terminal.")
+
+                # Run the command, keeping the terminal interactive
+                result = subprocess.run(
+                    command,
+                    shell=True,  # Required for winget to run in the shell
+                    check=False,  # Don't raise an exception on non-zero exit codes
+                    text=True,    # Ensure output is treated as text
+                    stdout=sys.stdout,  # Direct output to terminal
+                    stderr=sys.stderr,  # Direct errors to terminal
+                    stdin=sys.stdin     # Allow user input for prompts
+                )
+
+                # Check the result
+                if result.returncode == 0:
+                    print(f"Successfully installed {element.url}.")
+                    return True
+                else:
+                    print(f"Failed to install {element.url}. Exit code: {result.returncode}")
+                    return False
+
+            except subprocess.SubprocessError as e:
+                print(f"An error occurred while running winget: {e}")
+                return False
+
 
         case 'HF_REPO':
             include_list = ['*.*']
@@ -357,11 +452,35 @@ def get_and_extract(url, location, overwrite, basefolder=os.getcwd()):
                     # archive.extractall(path=location)
                     # archive.close()
                 case '.py':
-                    # case to handle processing py files for additional functionality needs
-                    if element.item_type == 'LOCAL_FILE':   
-                        exec(open(element.url).read(), globals())
+                    if element.item_type == 'LOCAL_FILE':
+                        print(f"Executing local Python script: {element.url}")
+                        try:
+                            # Run the script as a subprocess with Popen for real-time output
+                            process = subprocess.Popen(
+                                [sys.executable, element.url],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.STDOUT,  # Combine stderr with stdout
+                                text=True,
+                                bufsize=1,
+                                universal_newlines=True
+                            )
+                            # Stream output in real-time
+                            while True:
+                                line = process.stdout.readline().strip()
+                                if not line and process.poll() is not None:
+                                    break
+                                if line:
+                                    print(line)  # Print output to console
+                            # Wait for the process to complete and get the return code
+                            return_code = process.wait()
+                            print(f"Script {element.url} exited with code {return_code}")
+                            if return_code != 0:
+                                print(f"Warning: Script {element.url} failed with exit code {return_code}")
+                            # Continue processing CSV regardless of exit code
+                        except subprocess.SubprocessError as e:
+                            print(f"Error executing {element.url}: {e}")
                     else:
-                        stream_dl(url,location)
+                        stream_dl(url, location)
 
                 # Not an archive
                 case _:
@@ -380,20 +499,21 @@ if not os.path.isabs(manifestFile):
 #Change the working directory to the install folder directory
 installFolder = os.path.normpath(os.path.join(os.getcwd(),'ComfyUI_windows_portable'))
 print('Change the working folder to: '+installFolder)
+set_persistent_env_var('COMFYUI_BASE',installFolder)
 os.chdir(installFolder)
 
     
 baseFolder = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
 
 # Now get the ComfyManager from it's git repo
-repository_url = "https://github.com/ltdrdata/ComfyUI-Manager.git"
+# repository_url = "https://github.com/ltdrdata/ComfyUI-Manager.git"
 # Where ComfyManager will go
-destination_folder = "./ComfyUI/custom_nodes/ComfyUI-Manager"
+# destination_folder = "./ComfyUI/custom_nodes/ComfyUI-Manager"
 # Create the target directory
-os.makedirs(os.path.dirname(destination_folder), exist_ok=True)
+# os.makedirs(os.path.dirname(destination_folder), exist_ok=True)
 # Cloning the repository
-manage_package('ComfyUI-Manager',repository_url, destination_folder)
-subprocess.call([sys.executable, '-m', 'pip', 'install','-r','./ComfyUI/custom_nodes/ComfyUI-Manager/requirements.txt'])
+# manage_package('ComfyUI-Manager',repository_url, destination_folder)
+# subprocess.call([sys.executable, '-m', 'pip', 'install','-r','./ComfyUI/custom_nodes/ComfyUI-Manager/requirements.txt'])
 
 # Load the CSV file and iterate over each line
 print(manifestFile)
